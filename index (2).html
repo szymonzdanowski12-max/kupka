@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jagoda | Trycholog</title>
+<meta name="description" content="Jagoda – trycholog. Strona wizytówkowa z ofertą zabiegów, kontaktem, Instagramem i mapą." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f7f4;
+  --bg-warm: #e8efe8;
+  --white: #ffffff;
+  --forest: #1a3c2a;
+  --forest-light: #2d5c42;
+  --forest-pale: rgba(26,60,42,.08);
+  --green: #3d6b4f;
+  --green-light: #7aa88a;
+  --green-pale: rgba(61,107,79,.12);
+  --text: #1a3c2a;
+  --text-soft: #4a6b54;
+  --text-light: #6b8a72;
+  --border: rgba(26,60,42,.15);
+  --shadow: 0 16px 40px rgba(26,60,42,.1);
+  --radius: 24px;
+  --max: 1140px;
+  --font-body: 'Outfit', sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body); color: var(--text); line-height: 1.7;
+  background: var(--bg);
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+.container { width: min(calc(100% - 2rem), var(--max)); margin-inline: auto; }
+
+/* Header */
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--forest); backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid rgba(255,255,255,.15);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 72px; gap: 1rem;
+}
+.brand {
+  display: flex; align-items: center; gap: .75rem;
+}
+.brand-circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--forest), var(--green));
+  display: grid; place-items: center; color: white;
+}
+.brand-circle svg { width: 20px; height: 20px; }
+.brand-name strong {
+  font-family: var(--font-display); font-size: 1.5rem; line-height: 1;
+  color: white;
+}
+.brand-name span {
+  font-size: .6rem; text-transform: uppercase; letter-spacing: .2em;
+  color: rgba(255,255,255,.7); font-weight: 600;
+}
+.nav-links { display: flex; gap: .15rem; }
+.nav-links a {
+  padding: .5rem 1rem; border-radius: 999px;
+  color: rgba(255,255,255,.8); font-weight: 500; font-size: .9rem;
+  transition: all .2s ease;
+}
+.nav-links a:hover {
+  background: rgba(255,255,255,.15); color: white;
+}
+
+/* Hero */
+.hero {
+  padding: clamp(3rem, 8vw, 6rem) 0;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; top: -15%; right: -10%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, var(--green-pale), transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  gap: clamp(2rem, 4vw, 4rem); align-items: center;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .4rem .9rem; border-radius: 999px;
+  background: var(--forest-pale); border: 1.5px solid var(--border);
+  color: var(--forest); font-size: .72rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; width: fit-content;
+}
+.hero-badge::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--forest);
+}
+h1 {
+  font-family: var(--font-display); font-size: clamp(2.8rem, 1.2rem + 3.5vw, 4.4rem);
+  line-height: 1.12; color: var(--forest); margin-top: 1.2rem;
+  max-width: 20ch; letter-spacing: -0.02em; text-wrap: balance;
+  font-weight: 600;
+}
+.hero-text {
+  color: var(--text-soft); font-size: 1.08rem; max-width: 52ch;
+  margin-top: 1.8rem; line-height: 1.85;
+}
+.hero-cta {
+  display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 2rem;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .85rem 1.5rem; border-radius: 999px;
+  font-weight: 600; font-size: .95rem; transition: all .2s ease;
+}
+.btn-filled {
+  background: var(--forest); color: white;
+  box-shadow: 0 8px 24px rgba(26,60,42,.25);
+}
+.btn-filled:hover { background: var(--forest-light); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--forest);
+  border: 2px solid var(--green-light);
+}
+.btn-outline:hover { background: var(--green-pale); }
+
+.hero-visual {
+  position: relative;
+}
+.hero-photo {
+  border-radius: var(--radius); overflow: hidden;
+  aspect-ratio: 3/4; background: var(--bg-warm);
+  box-shadow: var(--shadow);
+  border: 3px solid var(--forest);
+}
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-float {
+  position: absolute; bottom: 1.5rem; left: -1.5rem;
+  background: var(--forest); color: white;
+  padding: 1.2rem 1.4rem; border-radius: 18px;
+  box-shadow: var(--shadow); max-width: 260px;
+}
+.hero-float strong {
+  display: block; font-size: .9rem; margin-bottom: .3rem;
+}
+.hero-float span {
+  font-size: .82rem; opacity: .85; line-height: 1.5;
+}
+
+/* About */
+.about {
+  background: white; border-radius: var(--radius) var(--radius) 0 0;
+  margin-top: -2rem; position: relative; z-index: 2;
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+.about-header {
+  text-align: center; max-width: 600px; margin: 0 auto 3rem;
+}
+.about-label {
+  font-size: .7rem; text-transform: uppercase; letter-spacing: .2em;
+  color: var(--forest); font-weight: 700;
+}
+.about-header h2 {
+  font-family: var(--font-display); font-size: clamp(2rem, .8rem + 2.5vw, 3rem);
+  color: var(--forest); margin: .5rem 0 1rem;
+}
+.about-header p {
+  color: var(--text-soft); font-size: 1.05rem;
+}
+.about-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+}
+.about-card {
+  background: var(--bg); border-radius: 20px;
+  padding: clamp(1.5rem, 2vw, 2rem);
+  border: 1.5px solid var(--border);
+}
+.about-card h3 {
+  font-family: var(--font-display); font-size: 1.4rem; color: var(--forest);
+  margin-bottom: .8rem;
+}
+.about-card p {
+  color: var(--text-soft); line-height: 1.7;
+}
+.about-card .sign {
+  margin-top: 1.5rem; font-family: var(--font-display);
+  font-size: 1.8rem; color: var(--forest); font-style: italic;
+}
+.about-card ul {
+  list-style: none; padding: 0; display: grid; gap: .8rem;
+}
+.about-card li {
+  position: relative; padding-left: 1.5rem; color: var(--text-soft);
+  line-height: 1.6;
+}
+.about-card li::before {
+  content: ""; position: absolute; left: 0; top: .5rem;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+}
+
+/* Treatments */
+.treatments {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+.treatments-header {
+  text-align: center; margin-bottom: 2.5rem;
+}
+.treatments-header h2 {
+  font-family: var(--font-display); font-size: clamp(2rem, .8rem + 2.5vw, 3rem);
+  color: var(--forest);
+}
+.treatments-header p {
+  color: var(--text-soft); margin-top: .5rem;
+}
+.treatments-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+}
+.treatment {
+  background: white; border-radius: 20px;
+  border: 1.5px solid var(--border); overflow: hidden;
+  box-shadow: 0 4px 16px rgba(26,60,42,.04);
+  transition: box-shadow .2s ease;
+}
+.treatment:hover { box-shadow: var(--shadow); }
+.treatment summary {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1.1rem 1.3rem; cursor: pointer; list-style: none;
+}
+.treatment summary::-webkit-details-marker { display: none; }
+.treatment-left {
+  display: flex; align-items: center; gap: .8rem; min-width: 0;
+}
+.treatment-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--forest-pale); color: var(--forest);
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.treatment-icon svg { width: 18px; height: 18px; }
+.treatment-left span {
+  font-weight: 600; color: var(--forest); font-size: .95rem;
+}
+.treatment-toggle {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--forest-pale); color: var(--forest);
+  display: grid; place-items: center; flex-shrink: 0;
+  font-size: 1.1rem; transition: transform .2s ease;
+}
+details[open] .treatment-toggle { transform: rotate(45deg); }
+.treatment-body {
+  padding: 0 1.3rem 1.3rem;
+}
+.treatment-body p {
+  color: var(--text-soft); font-size: .95rem; line-height: 1.7;
+  white-space: pre-line;
+}
+
+/* Contact */
+.contact {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+  background: white;
+}
+.contact-header {
+  text-align: center; margin-bottom: 2.5rem;
+}
+.contact-header h2 {
+  font-family: var(--font-display); font-size: clamp(2rem, .8rem + 2.5vw, 3rem);
+  color: var(--forest);
+}
+.contact-header p {
+  color: var(--text-soft); margin-top: .5rem;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+.contact-card {
+  background: var(--bg); border-radius: 20px;
+  padding: clamp(1.5rem, 2vw, 2rem);
+  border: 1.5px solid var(--border);
+}
+.contact-row {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1.5px solid var(--border);
+}
+.contact-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.contact-row:first-child { padding-top: 0; }
+.contact-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--forest-pale); color: var(--forest);
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.contact-icon svg { width: 20px; height: 20px; }
+.contact-row div strong {
+  display: block; font-size: .9rem; color: var(--forest); margin-bottom: .15rem;
+}
+.contact-row div a {
+  color: var(--text-soft); font-size: .95rem; word-break: break-word;
+}
+.contact-row div a:hover { color: var(--forest); }
+.map-box {
+  border-radius: 20px; overflow: hidden;
+  border: 1.5px solid var(--border); box-shadow: 0 4px 16px rgba(26,60,42,.04);
+  min-height: 400px; background: var(--bg-warm);
+}
+.map-box iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+
+/* Footer */
+footer {
+  background: var(--forest); color: white; padding: 2.5rem 0 3rem;
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1.5rem; flex-wrap: wrap;
+}
+.footer-brand strong {
+  font-family: var(--font-display); font-size: 1.6rem;
+}
+.footer-brand span {
+  font-size: .75rem; opacity: .7; text-transform: uppercase;
+  letter-spacing: .15em;
+}
+.footer-links {
+  display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: .9rem;
+}
+.footer-links a { color: rgba(255,255,255,.7); }
+.footer-links a:hover { color: white; }
+
+/* Cookie */
+.cookie {
+  position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+  z-index: 100; width: min(calc(100% - 2rem), 780px);
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow);
+  padding: 1rem 1.2rem; display: flex; gap: 1rem;
+  align-items: center; flex-wrap: wrap;
+}
+.cookie p {
+  flex: 1 1 300px; margin: 0; font-size: .88rem; color: var(--text-soft);
+}
+.cookie-btns { display: flex; gap: .6rem; }
+.cookie-btns button {
+  padding: .55rem 1rem; border-radius: 999px; font-weight: 600;
+  border: 2px solid transparent; font-size: .9rem; cursor: pointer;
+}
+.cookie-ok { background: var(--forest); color: white; }
+.cookie-no { background: transparent; color: var(--text-soft); border-color: var(--border); }
+
+/* Modal */
+.modal-bg {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(26,60,42,.5); display: none;
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-bg.active { display: flex; }
+.modal-box {
+  background: white; border-radius: var(--radius);
+  border: 1.5px solid var(--border); box-shadow: var(--shadow);
+  max-width: 680px; width: 100%; max-height: 85vh; overflow: auto;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+.modal-box h2 {
+  font-family: var(--font-display); color: var(--forest); margin-bottom: 1.2rem;
+}
+.modal-box h3 {
+  font-size: 1rem; color: var(--forest); margin: 1.5rem 0 .4rem;
+}
+.modal-box p, .modal-box li { color: var(--text-soft); font-size: .95rem; }
+.modal-box ul { padding-left: 1.2rem; margin: .5rem 0; }
+.modal-close {
+  margin-top: 1.5rem; padding: .7rem 1.3rem; border-radius: 999px;
+  border: 2px solid var(--border); background: var(--bg);
+  color: var(--forest); font-weight: 600; cursor: pointer;
+}
+
+[data-reveal] { opacity: 0; transform: translateY(20px); transition: .6s ease; }
+[data-reveal].show { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .hero-inner, .about-grid, .treatments-grid, .contact-grid { grid-template-columns: 1fr; }
+  .hero-float { left: 1rem; }
+  .nav { flex-direction: column; align-items: flex-start; padding: 1rem 0; }
+}
+@media (max-width: 500px) {
+  .container { width: calc(100% - 1.5rem); }
+  .hero-cta { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#start">
+      <span class="brand-circle" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-5.2 1.2-9.1 3.6-12.1C17.4 6.7 19.8 5 22 4c-.7 3.6-2.2 6.4-4.6 8.3-1.7 1.4-3.5 2.2-5.4 2.7"/><path d="M11.6 13.8C8.4 13.7 6 12.8 4.2 11 2.6 9.5 1.6 7.4 1 4.8c2.8.8 5 2 6.6 3.6 2.1 2 3.2 3.8 4 5.4"/></svg>
+      </span>
+      <span class="brand-name"><strong>Jagoda</strong><span>Trycholog</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#o-mnie">O mnie</a>
+      <a href="#zabiegi">Zabiegi</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="start">
+    <div class="container hero-inner">
+      <div data-reveal>
+        <span class="hero-badge">Trychologia · pielęgnacja · dobrostan</span>
+        <h1>Zapraszam do miejsca, w którym pielęgnacja skóry głowy i włosów daje widoczną troskę, lekkość i przyjemność.</h1>
+        <p class="hero-text">W moim gabinecie łączę estetykę, profesjonalne podejście i atmosferę, w której można naprawdę się zatrzymać. Zależy mi, aby każda wizyta była czytelna, komfortowa i dawała poczucie zaopiekowania od pierwszej chwili.</p>
+        <div class="hero-cta">
+          <a class="btn btn-filled" href="tel:+48531658816">Umów kontakt: 531 658 816</a>
+          <a class="btn btn-outline" href="#zabiegi">Poznaj zabiegi</a>
+        </div>
+      </div>
+      <div class="hero-visual" data-reveal>
+        <div class="hero-photo"><img src="jagoda.jpg" alt="Jagoda – trycholog" width="768" height="1024" loading="eager" decoding="async" /></div>
+        <div class="hero-float">
+          <strong>Spokojna oprawa, lekka energia</strong>
+          <span>Czeka na Ciebie komfort, uważność i zabieg szyty na miarę Twoich potrzeb.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="o-mnie">
+    <div class="container">
+      <div class="about-header" data-reveal>
+        <p class="about-label">Poznaj mnie</p>
+        <h2>O mnie</h2>
+        <p>Prowadzę gabinet z myślą o osobach, które chcą zadbać o skórę głowy i włosy w spokojnym, estetycznym otoczeniu. Bliskie są mi uważność, delikatność oraz pielęgnacja, która daje nie tylko komfort podczas wizyty, ale też poczucie świeżości i lekkości po wyjściu z gabinetu.</p>
+      </div>
+      <div class="about-grid">
+        <article class="about-card" data-reveal>
+          <h3>Jak pracuję</h3>
+          <p>Każda wizyta przebiega spokojnie i uważnie — możesz liczyć na pełne zaangażowanie, indywidualne podejście i atmosferę, w której poczujesz się zaopiekowana.</p>
+          <div class="sign">Jagoda</div>
+        </article>
+        <article class="about-card" data-reveal>
+          <h3>Na czym mi zależy</h3>
+          <ul>
+            <li>na przyjaznej, optymistycznej atmosferze w gabinecie,</li>
+            <li>na pielęgnacji łączącej komfort, estetykę i uważność,</li>
+            <li>na czytelnej ofercie i prostym kontakcie,</li>
+            <li>na tym, aby każda wizyta dawała poczucie świeżości i lekkości.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="treatments" id="zabiegi">
+    <div class="container">
+      <div class="treatments-header" data-reveal>
+        <p class="about-label">Oferta</p>
+        <h2>Zabiegi</h2>
+        <p>Kliknij w wybrany zabieg, aby poznać jego opis.</p>
+      </div>
+      <div class="treatments-grid">
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 14c2-3 4.3-4.5 7-4.5S17 11 19 14"/><path d="M7 17c1.6-1.8 3.3-2.7 5-2.7 1.7 0 3.4.9 5 2.7"/></svg></span>
+              <span>Trychologiczne Head Spa</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>To nasz flagowy zabieg, który udowadnia, że dbanie o zdrowie może być czystą przyjemnością. Rytuał zaczynamy od dogłębnego oczyszczenia skóry głowy z nadmiaru zrogowaciałego naskórka i osadów, których nie da się usunąć podczas codziennego mycia w domu. Następnie, przy użyciu profesjonalnych dermokosmetyków i kojącej pary, wprowadzamy składniki aktywne w głąb włosa. Całość odbywa się w atmosferze głębokiego relaksu, przy użyciu technik masażu, które wyciszają zmysły. Efekt? Skóra, która w końcu „oddycha", włosy lśniące jak po najlepszej regeneracji i głowa wolna od codziennych trosk.</p></div>
+        </details>
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6c1 1.2 2.5 2 4.2 2H14c3.3 0 6 2.7 6 6v4"/><path d="M8 18c0-2.2 1.8-4 4-4h4"/></svg></span>
+              <span>Terapia powięzi Obręczy barkowej</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>Często nie zdajemy sobie sprawy, że kondycja naszych włosów zaczyna się już w ramionach. Chroniczny stres i godziny spędzone przed komputerem powodują, że mięśnie karku stają się sztywne jak pancerz, co ogranicza dopływ krwi do skóry głowy. Nasz masaż koncentruje się na rozluźnieniu tych napięć i „odblokowaniu" przepływu energii oraz składników odżywczych. To idealne rozwiązanie dla osób skarżących się na bóle głowy i zmęczenie. Po zabiegu poczujesz niesamowitą lekkość w ramionach, a Twoje cebulki włosowe otrzymają naturalny zastrzyk energii dzięki lepszemu ukrwieniu.</p></div>
+        </details>
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5c2.8 2 4.5 4.4 4.5 7.1A4.5 4.5 0 1 1 7.5 12C7.5 9.4 9.2 7 12 5Z"/><path d="M9 16c.8-1 1.8-1.5 3-1.5s2.2.5 3 1.5"/></svg></span>
+              <span>Terapia powięzi skóry głowy</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>To technika dla osób, które szukają głębokiego efektu terapeutycznego. Z biegiem czasu skóra głowy może stać się napięta i „przyklejona" do podłoża, co utrudnia pracę mieszków włosowych i przyspiesza wypadanie włosów. Podczas masażu powięziowego pracujemy nad przywróceniem skórze elastyczności i mobilności. Jest to niezwykle odprężające uczucie, które uwalnia od napięciowych bólów głowy i stymuluje mikrokrążenie. Skóra staje się lepiej odżywiona, a Ty odczuwasz głęboki spokój, który promieniuje na całą twarz, dając efekt naturalnego wypoczęcia.</p></div>
+        </details>
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 5c5 1.5 8 5.8 8 12"/><path d="M10 4c5 1.3 8 5.2 8 11"/></svg></span>
+              <span>Trychologiczny zabieg na łodygę włosa</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>Zapomnij o maskach, które działają tylko do pierwszego mycia. Nasz zabieg to intensywna kuracja naprawcza, która wnika w głąb włosa, uzupełniając ubytki w jego strukturze. Skupiamy się na dostarczeniu lipidów i protein, które są naturalnym budulcem włosa. Po zabiegu pasma są wyraźnie grubsze, bardziej elastyczne i odporne na łamanie czy rozdwajanie. To ratunek dla włosów, które straciły swoją witalność przez stylizację lub czynniki zewnętrzne.</p></div>
+        </details>
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c3 3.2 5 6 5 9a5 5 0 1 1-10 0c0-3 2-5.8 5-9Z"/></svg></span>
+              <span>Trychologiczny zabieg na skórę głowy</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>Jeśli borykasz się z łupieżem, nadmiernym przetłuszczaniem, swędzeniem czy pieczeniem – ten zabieg jest stworzony dla Ciebie. Używamy profesjonalnych preparatów leczniczych, które przywracają skórze jej naturalną równowagę i odpowiednie pH. Oczyszczamy skórę z tzw. czopa łojowego, który często blokuje wzrost nowych włosów. Zdrowa, ukojona skóra to jedyny fundament, na którym mogą urosnąć zdrowe i mocne włosy.</p></div>
+        </details>
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c0-5 1.4-8.8 4.2-11.5C18 7.7 20.1 6.2 22 5.5c-.5 3.1-1.9 5.7-4.1 7.7C16 15 14 16 12 16.6"/><path d="M12 16.4C10 16 8 15 6 13.2 3.8 11.2 2.4 8.7 2 5.5c1.9.7 4 2.2 5.8 4C10.6 12.2 12 16 12 21Z"/></svg></span>
+              <span>Mezoterapia mikroigłowa</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>To zabieg dla osób, które chcą realnie zagęścić swoją fryzurę. Przy pomocy urządzenia z cieniutkimi igiełkami wykonujemy tysiące mikroskopijnych nakłuć. Działa to dwutorowo: po pierwsze, pobudzamy skórę do naturalnej regeneracji i produkcji nowych komórek, a po drugie – tworzymy drogę dla silnie skoncentrowanych ampułek, by mogły dotrzeć bezpośrednio do cebulek. To jeden z najskuteczniejszych sposobów na walkę z wypadaniem włosów i pobudzenie „baby hair".</p></div>
+        </details>
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M7 7v10"/><path d="M17 7v10"/><path d="M12 7v10"/><path d="M6 17c1.2 0 2-.7 2-1.8V14"/><path d="M16 17c1.2 0 2-.7 2-1.8V14"/></svg></span>
+              <span>Mezoterapia igłowa</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>Najbardziej bezpośrednia forma odżywienia włosów, jaką zna współczesna trychologia. Podczas zabiegu wprowadzamy specjalistyczny koktajl, czyli witaminy, minerały i peptydy, bezpośrednio do głębokich warstw skóry, tam gdzie odbywa się wzrost włosa. Omijamy barierę naskórkową, której nie przebije żaden szampon czy wcierka. To zabieg o ogromnej sile działania, idealny przy silnym wypadaniu włosów i potrzebie szybkiej regeneracji.</p></div>
+        </details>
+        <details class="treatment" data-reveal>
+          <summary>
+            <span class="treatment-left">
+              <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></span>
+              <span>Karboksyterapia</span>
+            </span>
+            <span class="treatment-toggle">+</span>
+          </summary>
+          <div class="treatment-body"><p>Często nazywana „cudownym gazem", karboksyterapia polega na podaniu pod skórę medycznego dwutlenku węgla. Mechanizm jest prosty i genialny: organizm, czując gaz, wysyła w to miejsce ogromną ilość tlenu i krwi, by go zneutralizować. Dzięki temu mieszki włosowe zostają gwałtownie dożywione i dotlenione, jak nigdy wcześniej. To potężny impuls, który pobudza cebulki do pracy i pomaga hamować proces wypadania włosów w krótkim czasie.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="kontakt">
+    <div class="container">
+      <div class="contact-header" data-reveal>
+        <p class="about-label">Kontakt</p>
+        <h2>Skontaktuj się ze mną</h2>
+        <p>Napisz, zadzwoń lub zajrzyj na Instagram — chętnie odpowiem na każde pytanie.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card" data-reveal>
+          <div class="contact-row">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.8a16 16 0 0 0 4.4 4.4L15 13l5 2v4a2 2 0 0 1-2.2 2A17.8 17.8 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg></div>
+            <div><strong>Telefon</strong><a href="tel:+48531658816">531 658 816</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></div>
+            <div><strong>E-mail</strong><a href="mailto:jagodakosmetolog@gmail.com">jagodakosmetolog@gmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+            <div><strong>Instagram</strong><a href="https://www.instagram.com/jagodakosmetologia/" target="_blank" rel="noopener noreferrer">@jagodakosmetologia</a></div>
+          </div>
+        </div>
+        <div class="map-box" data-reveal>
+          <iframe title="Mapa Google" src="https://www.google.com/maps?q=Pozna%C5%84&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <strong>Jagoda</strong>
+      <span>Trycholog</span>
+    </div>
+    <div class="footer-links">
+      <a href="tel:+48531658816">531 658 816</a>
+      <a href="mailto:jagodakosmetolog@gmail.com">jagodakosmetolog@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookieBanner" role="alert" aria-live="polite">
+  <p>Ta strona korzysta z plików cookies w celu zapewnienia prawidłowego działania. Brak plików analitycznych ani reklamowych. <a href="#" id="openPrivacy">Polityka prywatności</a>.</p>
+  <div class="cookie-btns">
+    <button class="cookie-ok" id="cookieAccept">Akceptuję</button>
+    <button class="cookie-no" id="cookieReject">Odrzuć</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+  <div class="modal-box">
+    <h2 id="privacyTitle">Polityka prywatności</h2>
+    <h3>Administrator danych</h3>
+    <p>Administratorem Twoich danych osobowych jest Jagoda, prowadząca gabinet trychologiczny, dostępna pod adresem e-mail: <a href="mailto:jagodakosmetolog@gmail.com">jagodakosmetolog@gmail.com</a> oraz telefonicznie: 531 658 816.</p>
+    <h3>Jakie dane przetwarzamy</h3>
+    <p>Dane podane dobrowolnie w kontakcie e-mailowym lub telefonicznym (imię, numer telefonu, adres e-mail) w celu umówienia wizyty i świadczenia usług gabinetowych.</p>
+    <h3>Podstawa prawna</h3>
+    <p>Przetwarzanie danych odbywa się na podstawie art. 6 ust. 1 lit. b RODO (wykonanie umowy lub działania przed jej zawarciem) oraz art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes administratora).</p>
+    <h3>Okres przechowywania</h3>
+    <p>Dane przechowywane są przez czas niezbędny do realizacji usługi i obsługi ewentualnych reklamacji, nie dłużej niż wymagają tego przepisy prawa.</p>
+    <h3>Twoje prawa</h3>
+    <ul>
+      <li>Prawo dostępu do danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania.</li>
+      <li>Prawo do przenoszenia danych.</li>
+      <li>Prawo do wniesienia sprzeciwu wobec przetwarzania.</li>
+      <li>Prawo do wniesienia skargi do Prezesa UODO (uodo.gov.pl).</li>
+    </ul>
+    <h3>Cookies</h3>
+    <p>Strona może wykorzystywać niezbędne pliki cookies zapewniające prawidłowe działanie. Strona nie korzysta z plików analitycznych ani reklamowych bez Twojej zgody.</p>
+    <h3>Mapa Google</h3>
+    <p>Strona zawiera osadzoną mapę Google Maps (Google LLC). Korzystanie z mapy może wiązać się z przesyłaniem danych do serwerów Google. Szczegóły znajdziesz w <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Polityce prywatności Google</a>.</p>
+    <button class="modal-close" id="closePrivacy">Zamknij</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const banner = document.getElementById('cookieBanner');
+  document.getElementById('cookieAccept')?.addEventListener('click', () => banner.style.display = 'none');
+  document.getElementById('cookieReject')?.addEventListener('click', () => banner.style.display = 'none');
+  const modal = document.getElementById('privacyModal');
+  document.getElementById('openPrivacy')?.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
+  document.getElementById('closePrivacy')?.addEventListener('click', () => modal.classList.remove('active'));
+  modal?.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal?.classList.remove('active'); });
+  const io = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }), { threshold: .12 });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
