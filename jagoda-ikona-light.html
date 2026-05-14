@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jagoda | Trycholog</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjMWEzYzJhIi8+PHRleHQgeD0iNTAiIHk9Ijc1IiBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtc2l6ZT0iNzAiIGZpbGw9IndoaXRlIiBmb250LXdlaWdodD0iNjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5KPC90ZXh0Pjwvc3ZnPg==">
+<meta name="description" content="Jagoda – trycholog. Strona wizytówkowa z ofertą zabiegów, kontaktem, Instagramem i mapą." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f7f4;
+  --bg-warm: #e8efe8;
+  --white: #ffffff;
+  --forest: #1a3c2a;
+  --forest-light: #2d5c42;
+  --forest-pale: rgba(26,60,42,.08);
+  --green: #3d6b4f;
+  --green-light: #7aa88a;
+  --green-pale: rgba(61,107,79,.12);
+  --text: #1a3c2a;
+  --text-soft: #4a6b54;
+  --text-light: #6b8a72;
+  --border: rgba(26,60,42,.15);
+  --shadow: 0 16px 40px rgba(26,60,42,.1);
+  --radius: 24px;
+  --max: 1140px;
+  --font-body: 'Outfit', sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body); color: var(--text); line-height: 1.7;
+  background: var(--bg);
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+.container { width: min(calc(100% - 2rem), var(--max)); margin-inline: auto; }
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--forest); backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid rgba(255,255,255,.15);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 72px; gap: 1rem;
+}
+.brand {
+  display: flex; align-items: center; gap: .75rem;
+}
+.brand-circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--forest), var(--green));
+  display: grid; place-items: center; color: white;
+}
+.brand-circle svg { width: 20px; height: 20px; }
+.brand-name strong {
+  font-family: var(--font-display); font-size: 1.5rem; line-height: 1;
+  color: white;
+}
+.brand-name span {
+  font-size: .6rem; text-transform: uppercase; letter-spacing: .2em;
+  color: rgba(255,255,255,.7); font-weight: 600;
+}
+.nav-links { display: flex; gap: .15rem; }
+.nav-links a {
+  padding: .5rem 1rem; border-radius: 999px;
+  color: rgba(255,255,255,.8); font-weight: 500; font-size: .9rem;
+  transition: all .2s ease;
+}
+.nav-links a:hover {
+  background: rgba(255,255,255,.15); color: white;
+}
+.hero {
+  padding: clamp(3rem, 8vw, 6rem) 0;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; top: -15%; right: -10%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, var(--green-pale), transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  gap: clamp(2rem, 4vw, 4rem); align-items: center;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .4rem .9rem; border-radius: 999px;
+  background: var(--forest-pale); border: 1.5px solid var(--border);
+  color: var(--forest); font-size: .72rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; width: fit-content;
+}
+.hero-badge::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--forest);
+}
+h1 {
+  font-family: var(--font-display); font-size: clamp(2.8rem, 1.2rem + 3.5vw, 4.4rem);
+  line-height: 1.12; color: var(--forest); margin-top: 1.2rem;
+  max-width: 20ch; letter-spacing: -0.02em; text-wrap: balance;
+  font-weight: 600;
+}
+.hero-text {
+  color: var(--text-soft); font-size: 1.08rem; max-width: 52ch;
+  margin-top: 1.8rem; line-height: 1.85;
+}
+.hero-cta {
+  display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 2rem;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .85rem 1.5rem; border-radius: 999px;
+  font-weight: 600; font-size: .95rem; transition: all .2s ease;
+}
+.btn-filled {
+  background: var(--forest); color: white;
+  box-shadow: 0 8px 24px rgba(26,60,42,.25);
+}
+.btn-filled:hover { background: var(--forest-light); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--forest);
+  border: 2px solid var(--green-light);
+}
+.btn-outline:hover { background: var(--green-pale); }
+.hero-visual {
+  position: relative;
+}
+.hero-photo {
+  border-radius: var(--radius); overflow: hidden;
+  aspect-ratio: 3/4; background: var(--bg-warm);
+  box-shadow: var(--shadow);
+  border: 3px solid var(--forest);
+}
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-float {
+  position: absolute; bottom: 1.5rem; left: -1.5rem;
+  background: var(--forest); color: white;
+  padding: 1.2rem 1.4rem; border-radius: 18px;
+  box-shadow: var(--shadow); max-width: 260px;
+}
+.hero-float strong {
+  display: block; font-size: .9rem; margin-bottom: .3rem;
+}
+.hero-float span {
+  font-size: .82rem; opacity: .85; line-height: 1.5;
+}
+.about {
+  background: white; border-radius: var(--radius) var(--radius) 0 0;
+  margin-top: -2rem; position: relative; z-index: 2;
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+.about-header {
+  text-align: center; max-width: 600px; margin: 0 auto 3rem;
+}
+.about-label {
+  font-size: .7rem; text-transform: uppercase; letter-spacing: .2em;
+  color: var(--forest); font-weight: 700;
+}
+.about-header h2 {
+  font-family: var(--font-display); font-size: clamp(2rem, .8rem + 2.5vw, 3rem);
+  color: var(--forest); margin: .5rem 0 1rem;
+}
+.about-header p {
+  color: var(--text-soft); font-size: 1.05rem;
+}
+.about-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+}
+.about-card {
+  background: var(--bg); border-radius: 20px;
+  padding: clamp(1.5rem, 2vw, 2rem);
+  border: 1.5px solid var(--border);
+}
+.about-card h3 {
+  font-family: var(--font-display); font-size: 1.4rem; color: var(--forest);
+  margin-bottom: .8rem;
+}
+.about-card p {
+  color: var(--text-soft); line-height: 1.7;
+}
+.about-card .sign {
+  margin-top: 1.5rem; font-family: var(--font-display);
+  font-size: 1.8rem; color: var(--forest); font-style: italic;
+}
+.about-card ul {
+  list-style: none; padding: 0; display: grid; gap: .8rem;
+}
+.about-card li {
+  position: relative; padding-left: 1.5rem; color: var(--text-soft);
+  line-height: 1.6;
+}
+.about-card li::before {
+  content: ""; position: absolute; left: 0; top: .5rem;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+}
+.treatments {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+.treatments-header {
+  text-align: center; margin-bottom: 2.5rem;
+}
+.treatments-header h2 {
+  font-family: var(--font-display); font-size: clamp(2rem, .8rem + 2.5vw, 3rem);
+  color: var(--forest);
+}
+.treatments-header p {
+  color: var(--text-soft); margin-top: .5rem;
+}
+.treatments-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+}
+.treatment {
+  background: white; border-radius: 20px;
+  border: 1.5px solid var(--border); overflow: hidden;
+  box-shadow: 0 4px 16px rgba(26,60,42,.04);
+  transition: box-shadow .2s ease;
+}
+.treatment:hover { box-shadow: var(--shadow); }
+.treatment summary {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1.1rem 1.3rem; cursor: pointer; list-style: none;
+}
+.treatment summary::-webkit-details-marker { display: none; }
+.treatment-left {
+  display: flex; align-items: center; gap: .8rem; min-width: 0;
+}
+.treatment-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--forest-pale); color: var(--forest);
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.treatment-icon svg { width: 18px; height: 18px; }
+.treatment-left span {
+  font-weight: 600; color: var(--forest); font-size: .95rem;
+}
+.treatment-toggle {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--forest-pale); color: var(--forest);
+  display: grid; place-items: center; flex-shrink: 0;
+  font-size: 1.1rem; transition: transform .2s ease;
+}
+details[open] .treatment-toggle { transform: rotate(45deg); }
+.treatment-body {
+  padding: 0 1.3rem 1.3rem;
+}
+.treatment-body p {
+  color: var(--text-soft); font-size: .95rem; line-height: 1.7;
+  white-space: pre-line;
+}
+.contact {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+  background: white;
+}
+.contact-header {
+  text-align: center; margin-bottom: 2.5rem;
+}
+.contact-header h2 {
+  font-family: var(--font-display); font-size: clamp(2rem, .8rem + 2.5vw, 3rem);
+  color: var(--forest);
+}
+.contact-header p {
+  color: var(--text-soft); margin-top: .5rem;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+.contact-card {
+  background: var(--bg); border-radius: 20px;
+  padding: clamp(1.5rem, 2vw, 2rem);
+  border: 1.5px solid var(--border);
+}
+.contact-row {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1.5px solid var(--border);
+}
+.contact-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.contact-row:first-child { padding-top: 0; }
+.contact-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--forest-pale); color: var(--forest);
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.contact-icon svg { width: 20px; height: 20px; }
+.contact-row div strong {
+  display: block; font-size: .9rem; color: var(--forest); margin-bottom: .15rem;
+}
+.contact-row div a {
+  color: var(--text-soft); font-size: .95rem; word-break: break-word;
+}
+.contact-row div a:hover { color: var(--forest); }
+.map-box {
+  border-radius: 20px; overflow: hidden;
+  border: 1.5px solid var(--border); box-shadow: 0 4px 16px rgba(26,60,42,.04);
+  min-height: 400px; background: var(--bg-warm);
+}
+.map-box iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+footer {
+  background: var(--forest); color: white; padding: 2.5rem 0 3rem;
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1.5rem; flex-wrap: wrap;
+}
+.footer-brand strong {
+  font-family: var(--font-display); font-size: 1.6rem;
+}
+.footer-brand span {
+  font-size: .75rem; opacity: .7; text-transform: uppercase;
+  letter-spacing: .15em;
+}
+.footer-links {
+  display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: .9rem;
+}
+.footer-links a { color: rgba(255,255,255,.7); }
+.footer-links a:hover { color: white; }
+.cookie {
+  position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+  z-index: 100; width: min(calc(100% - 2rem), 780px);
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow);
+  padding: 1rem 1.2rem; display: flex; gap: 1rem;
+  align-items: center; flex-wrap: wrap;
+}
+.cookie p {
+  flex: 1 1 300px; margin: 0; font-size: .88rem; color: var(--text-soft);
+}
+.cookie-btns { display: flex; gap: .6rem; }
+.cookie-btns button {
+  padding: .55rem 1rem; border-radius: 999px; font-weight: 600;
+  border: 2px solid transparent; font-size: .9rem; cursor: pointer;
+}
+.cookie-ok { background: var(--forest); color: white; }
+.cookie-no { background: transparent; color: var(--text-soft); border-color: var(--border); }
+.modal-bg {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(26,60,42,.5); display: none;
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-bg.active { display: flex; }
+.modal-box {
+  background: white; border-radius: var(--radius);
+  border: 1.5px solid var(--border); box-shadow: var(--shadow);
+  max-width: 680px; width: 100%; max-height: 85vh; overflow: auto;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+.modal-box h2 {
+  font-family: var(--font-display); color: var(--forest); margin-bottom: 1.2rem;
+}
+.modal-box h3 {
+  font-size: 1rem; color: var(--forest); margin: 1.5rem 0 .4rem;
+}
+.modal-box p, .modal-box li { color: var(--text-soft); font-size: .95rem; }
+.modal-box ul { padding-left: 1.2rem; margin: .5rem 0; }
+.modal-close {
+  margin-top: 1.5rem; padding: .7rem 1.3rem; border-radius: 999px;
+  border: 2px solid var(--border); background: var(--bg);
+  color: var(--forest); font-weight: 600; cursor: pointer;
+}
+[data-reveal] { opacity: 0; transform: translateY(20px); transition: .6s ease; }
+[data-reveal].show { opacity: 1; transform: translateY(0); }
+@media (max-width: 900px) {
+  .hero-inner, .about-grid, .treatments-grid, .contact-grid { grid-template-columns: 1fr; }
+  .hero-float { left: 1rem; }
+  .nav { flex-direction: column; align-items: flex-start; padding: 1rem 0; }
+}
+@media (max-width: 500px) {
+  .container { width: calc(100% - 1.5rem); }
+  .hero-cta { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+}
+.treatment-card {
+  background: white; border-radius: 20px;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 4px 16px rgba(26,60,42,.04);
+  transition: all .2s ease;
+  cursor: pointer;
+}
+.treatment-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  border-color: var(--green);
+}
+.treatment-card-inner {
+  display: flex; align-items: center; gap: .8rem;
+  padding: 1.1rem 1.3rem;
+}
+.treatment-title {
+  font-weight: 600; color: var(--forest); font-size: .95rem;
+  flex: 1;
+}
+.treatment-arrow {
+  color: var(--green); font-size: 1.2rem; font-weight: 600;
+  transition: transform .2s ease;
+}
+.treatment-card:hover .treatment-arrow {
+  transform: translateX(4px);
+}
+.treatment-modal-bg {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(26,60,42,.55);
+  display: none; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.treatment-modal-bg.active {
+  display: flex;
+}
+.treatment-modal-box {
+  background: white; border-radius: var(--radius);
+  border: 1.5px solid var(--border); box-shadow: var(--shadow);
+  max-width: 680px; width: 100%; max-height: 85vh; overflow: auto;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  position: relative;
+}
+.treatment-modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--forest-pale); color: var(--forest);
+  border: none; font-size: 1.1rem; cursor: pointer;
+  display: grid; place-items: center;
+  transition: all .2s ease;
+}
+.treatment-modal-close:hover {
+  background: var(--forest); color: white;
+}
+.treatment-modal-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem; padding-right: 2.5rem;
+}
+.treatment-modal-header h3 {
+  font-family: var(--font-display); font-size: 1.8rem;
+  color: var(--forest); line-height: 1.2;
+}
+.treatment-modal-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--forest-pale); color: var(--forest);
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.treatment-modal-icon svg { width: 22px; height: 22px; }
+.treatment-modal-body {
+  color: var(--text-soft); font-size: 1rem; line-height: 1.8;
+}
+.treatment-modal-body p {
+  margin-bottom: 1rem;
+}
+::selection { background: var(--green-light); color: white; }
+.hero-visual::after {
+  content: ""; position: absolute; inset: -10px;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 5px);
+  z-index: -1;
+}
+h2 {
+  position: relative; padding-bottom: 1rem;
+}
+h2::after {
+  content: ""; position: absolute; bottom: 0; left: 0;
+  width: 40px; height: 2px; background: var(--green);
+}
+.about-header h2::after, .treatments-header h2::after, .contact-header h2::after {
+  left: 50%; transform: translateX(-50%);
+}
+.footer-legal {
+  border-top: 1px solid rgba(255,255,255,.1); margin-top: 2rem; padding-top: 1.5rem;
+}
+.footer-legal-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .8rem; color: rgba(255,255,255,.6); flex-wrap: wrap; gap: 1rem;
+}
+.footer-legal-links {
+  display: flex; gap: 1rem;
+}
+.footer-legal-links a:hover { color: white; }
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#start">
+      <span class="brand-circle" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-5.2 1.2-9.1 3.6-12.1C17.4 6.7 19.8 5 22 4c-.7 3.6-2.2 6.4-4.6 8.3-1.7 1.4-3.5 2.2-5.4 2.7"/><path d="M11.6 13.8C8.4 13.7 6 12.8 4.2 11 2.6 9.5 1.6 7.4 1 4.8c2.8.8 5 2 6.6 3.6 2.1 2 3.2 3.8 4 5.4"/></svg>
+      </span>
+      <span class="brand-name"><strong>Jagoda</strong><span>Trycholog</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#o-mnie">O mnie</a>
+      <a href="#zabiegi">Zabiegi</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero" id="start">
+    <div class="container hero-inner">
+      <div data-reveal>
+        <span class="hero-badge">Trychologia · pielęgnacja · dobrostan</span>
+        <h1>Zapraszam do miejsca, w którym pielęgnacja skóry głowy i włosów daje widoczną troskę, lekkość i przyjemność.</h1>
+        <p class="hero-text">W moim gabinecie łączę estetykę, profesjonalne podejście i atmosferę, w której można naprawdę się zatrzymać. Zależy mi, aby każda wizyta była czytelna, komfortowa i dawała poczucie zaopiekowania od pierwszej chwili.</p>
+        <div class="hero-cta">
+          <a class="btn btn-filled" href="tel:+48531658816">Umów kontakt: 531 658 816</a>
+          <a class="btn btn-outline" href="#zabiegi">Poznaj zabiegi</a>
+        </div>
+      </div>
+      <div class="hero-visual" data-reveal>
+        <div class="hero-photo">
+<img id="zdjecie-glowne" src="data:image/jpeg;base64,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" alt="Jagoda – trycholog" width="768" height="1024" loading="eager" decoding="async" /></div>
+        <div class="hero-float">
+          <strong>Spokojna oprawa, lekka energia</strong>
+          <span>Czeka na Ciebie komfort, uważność i zabieg szyty na miarę Twoich potrzeb.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="about" id="o-mnie">
+    <div class="container">
+      <div class="about-header" data-reveal>
+        <p class="about-label">Poznaj mnie</p>
+        <h2>O mnie</h2>
+        <p>Prowadzę gabinet z myślą o osobach, które chcą zadbać o skórę głowy i włosy w spokojnym, estetycznym otoczeniu. Bliskie są mi uważność, delikatność oraz pielęgnacja, która daje nie tylko komfort podczas wizyty, ale też poczucie świeżości i lekkości po wyjściu z gabinetu.</p>
+      </div>
+      <div class="about-grid">
+        <article class="about-card" data-reveal>
+          <h3>Jak pracuję</h3>
+          <p>Każda wizyta przebiega spokojnie i uważnie — możesz liczyć na pełne zaangażowanie, indywidualne podejście i atmosferę, w której poczujesz się zaopiekowana.</p>
+          <div class="sign">Jagoda</div>
+        </article>
+        <article class="about-card" data-reveal>
+          <h3>Na czym mi zależy</h3>
+          <ul>
+            <li>na przyjaznej, optymistycznej atmosferze w gabinecie,</li>
+            <li>na pielęgnacji łączącej komfort, estetykę i uważność,</li>
+            <li>na czytelnej ofercie i prostym kontakcie,</li>
+            <li>na tym, aby każda wizyta dawała poczucie świeżości i lekkości.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="treatments" id="zabiegi">
+    <div class="container">
+      <div class="treatments-header" data-reveal>
+        <p class="about-label">Oferta</p>
+        <h2>Zabiegi</h2>
+        <p>Kliknij w wybrany zabieg, aby poznać jego opis.</p>
+      </div>
+            <div class="treatments-grid">
+        <div class="treatment-card" data-reveal data-treatment="treatment-1">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 14c2-3 4.3-4.5 7-4.5S17 11 19 14"/><path d="M7 17c1.6-1.8 3.3-2.7 5-2.7 1.7 0 3.4.9 5 2.7"/></svg></span>
+            <span class="treatment-title">Trychologiczne Head Spa</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+        <div class="treatment-card" data-reveal data-treatment="treatment-2">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6c1 1.2 2.5 2 4.2 2H14c3.3 0 6 2.7 6 6v4"/><path d="M8 18c0-2.2 1.8-4 4-4h4"/></svg></span>
+            <span class="treatment-title">Terapia powięzi Obręczy barkowej</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+        <div class="treatment-card" data-reveal data-treatment="treatment-3">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5c2.8 2 4.5 4.4 4.5 7.1A4.5 4.5 0 1 1 7.5 12C7.5 9.4 9.2 7 12 5Z"/><path d="M9 16c.8-1 1.8-1.5 3-1.5s2.2.5 3 1.5"/></svg></span>
+            <span class="treatment-title">Terapia powięzi skóry głowy</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+        <div class="treatment-card" data-reveal data-treatment="treatment-4">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 5c5 1.5 8 5.8 8 12"/><path d="M10 4c5 1.3 8 5.2 8 11"/></svg></span>
+            <span class="treatment-title">Trychologiczny zabieg na łodygę włosa</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+        <div class="treatment-card" data-reveal data-treatment="treatment-5">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c3 3.2 5 6 5 9a5 5 0 1 1-10 0c0-3 2-5.8 5-9Z"/></svg></span>
+            <span class="treatment-title">Trychologiczny zabieg na skórę głowy</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+        <div class="treatment-card" data-reveal data-treatment="treatment-6">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c0-5 1.4-8.8 4.2-11.5C18 7.7 20.1 6.2 22 5.5c-.5 3.1-1.9 5.7-4.1 7.7C16 15 14 16 12 16.6"/><path d="M12 16.4C10 16 8 15 6 13.2 3.8 11.2 2.4 8.7 2 5.5c1.9.7 4 2.2 5.8 4C10.6 12.2 12 16 12 21Z"/></svg></span>
+            <span class="treatment-title">Mezoterapia mikroigłowa</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+        <div class="treatment-card" data-reveal data-treatment="treatment-7">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M7 7v10"/><path d="M17 7v10"/><path d="M12 7v10"/><path d="M6 17c1.2 0 2-.7 2-1.8V14"/><path d="M16 17c1.2 0 2-.7 2-1.8V14"/></svg></span>
+            <span class="treatment-title">Mezoterapia igłowa</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+        <div class="treatment-card" data-reveal data-treatment="treatment-8">
+          <div class="treatment-card-inner">
+            <span class="treatment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></span>
+            <span class="treatment-title">Karboksyterapia</span>
+            <span class="treatment-arrow">→</span>
+          </div>
+        </div>
+      </div></section>
+  <section class="contact" id="kontakt">
+    <div class="container">
+      <div class="contact-header" data-reveal>
+        <p class="about-label">Kontakt</p>
+        <h2>Skontaktuj się ze mną</h2>
+        <p>Napisz, zadzwoń lub zajrzyj na Instagram — chętnie odpowiem na każde pytanie.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card" data-reveal>
+          <div class="contact-row">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.8a16 16 0 0 0 4.4 4.4L15 13l5 2v4a2 2 0 0 1-2.2 2A17.8 17.8 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg></div>
+            <div><strong>Telefon</strong><a href="tel:+48531658816">531 658 816</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></div>
+            <div><strong>E-mail</strong><a href="mailto:jagodakosmetolog@gmail.com">jagodakosmetolog@gmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+            <div><strong>Instagram</strong><a href="https://www.instagram.com/jagodakosmetologia/" target="_blank" rel="noopener noreferrer">@jagodakosmetologia</a></div>
+          </div>
+        </div>
+        <div class="map-box" data-reveal>
+          <iframe title="Mapa Google" src="https://www.google.com/maps?q=Pozna%C5%84&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <strong>Jagoda</strong>
+      <span>Trycholog</span>
+    </div>
+    <div class="footer-links">
+      <a href="tel:+48531658816">531 658 816</a>
+      <a href="mailto:jagodakosmetolog@gmail.com">jagodakosmetolog@gmail.com</a>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <div class="footer-legal-inner">
+      <p>&copy; 2026 Jagoda Trycholog. Wszelkie prawa zastrzeżone.</p>
+      <div class="footer-legal-links">
+        <a href="#" id="openPrivacyFooter">Polityka prywatności</a>
+        <a href="#" id="openTermsFooter">Regulamin</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="cookie" id="cookieBanner" role="alert" aria-live="polite">
+  <p>Ta strona korzysta z plików cookies w celu zapewnienia prawidłowego działania. Brak plików analitycznych ani reklamowych. <a href="#" id="openPrivacy">Polityka prywatności</a>.</p>
+  <div class="cookie-btns">
+    <button class="cookie-ok" id="cookieAccept">Akceptuję</button>
+    <button class="cookie-no" id="cookieReject">Odrzuć</button>
+  </div>
+</div>
+<div class="modal-bg" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+  <div class="modal-box">
+    <h2 id="privacyTitle">Polityka prywatności</h2>
+    <h3>Administrator danych</h3>
+    <p>Administratorem Twoich danych osobowych jest Jagoda, prowadząca gabinet trychologiczny, dostępna pod adresem e-mail: <a href="mailto:jagodakosmetolog@gmail.com">jagodakosmetolog@gmail.com</a> oraz telefonicznie: 531 658 816.</p>
+    <h3>Jakie dane przetwarzamy</h3>
+    <p>Dane podane dobrowolnie w kontakcie e-mailowym lub telefonicznym (imię, numer telefonu, adres e-mail) w celu umówienia wizyty i świadczenia usług gabinetowych.</p>
+    <h3>Podstawa prawna</h3>
+    <p>Przetwarzanie danych odbywa się na podstawie art. 6 ust. 1 lit. b RODO (wykonanie umowy lub działania przed jej zawarciem) oraz art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes administratora).</p>
+    <h3>Okres przechowywania</h3>
+    <p>Dane przechowywane są przez czas niezbędny do realizacji usługi i obsługi ewentualnych reklamacji, nie dłużej niż wymagają tego przepisy prawa.</p>
+    <h3>Twoje prawa</h3>
+    <ul>
+      <li>Prawo dostępu do danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania.</li>
+      <li>Prawo do przenoszenia danych.</li>
+      <li>Prawo do wniesienia sprzeciwu wobec przetwarzania.</li>
+      <li>Prawo do wniesienia skargi do Prezesa UODO (uodo.gov.pl).</li>
+    </ul>
+    <h3>Cookies</h3>
+    <p>Strona może wykorzystywać niezbędne pliki cookies zapewniające prawidłowe działanie. Strona nie korzysta z plików analitycznych ani reklamowych bez Twojej zgody.</p>
+    <h3>Mapa Google</h3>
+    <p>Strona zawiera osadzoną mapę Google Maps (Google LLC). Korzystanie z mapy może wiązać się z przesyłaniem danych do serwerów Google. Szczegóły znajdziesz w <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Polityce prywatności Google</a>.</p>
+    <button class="modal-close" id="closePrivacy">Zamknij</button>
+  </div>
+</div>
+<div class="modal-bg" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+  <div class="modal-box">
+    <h2 id="termsTitle">Regulamin gabinetu</h2>
+    <h3>1. Postanowienia ogólne</h3>
+    <p>Regulamin określa zasady świadczenia usług w gabinecie trychologicznym "Jagoda Trycholog". Zapisanie się na wizytę oznacza akceptację niniejszego regulaminu.</p>
+    <h3>2. Rezerwacja i odwoływanie wizyt</h3>
+    <p>Wizyty można rezerwować telefonicznie, mailowo lub przez wiadomości na Instagramie. Odwołanie lub zmiana terminu wizyty powinna nastąpić najpóźniej 24 godziny przed umówionym terminem.</p>
+    <h3>3. Świadczenie usług</h3>
+    <p>Przed przystąpieniem do zabiegu przeprowadzany jest wywiad. Klient ma obowiązek poinformować o wszelkich przeciwwskazaniach zdrowotnych, alergiach oraz przyjmowanych lekach.</p>
+    <h3>4. Płatności</h3>
+    <p>Za usługi można płacić gotówką, kartą płatniczą lub przelewem (zależnie od aktualnych możliwości gabinetu). Ceny usług podawane są podczas rezerwacji.</p>
+    <h3>5. Reklamacje</h3>
+    <p>Wszelkie reklamacje dotyczące usług powinny być zgłaszane niezwłocznie po wizycie, najpóźniej w ciągu 7 dni. Zgłoszenia rozpatrywane są indywidualnie w terminie 14 dni.</p>
+    <button class="modal-close" onclick="document.getElementById('termsModal').classList.remove('active')">Zamknij</button>
+  </div>
+</div>
+<script>
+(() => {
+  const banner = document.getElementById('cookieBanner');
+  document.getElementById('cookieAccept')?.addEventListener('click', () => banner.style.display = 'none');
+  document.getElementById('cookieReject')?.addEventListener('click', () => banner.style.display = 'none');
+  const modal = document.getElementById('privacyModal');
+  document.getElementById('openPrivacy')?.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
+  document.getElementById('closePrivacy')?.addEventListener('click', () => modal.classList.remove('active'));
+  modal?.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal?.classList.remove('active'); });
+  document.getElementById('openPrivacyFooter')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('privacyModal').classList.add('active'); });
+  document.getElementById('openTermsFooter')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('termsModal').classList.add('active'); });
+  const io = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }), { threshold: .12 });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  // Treatment modals
+  document.querySelectorAll('.treatment-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.dataset.treatment;
+      document.getElementById('modal-' + id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  document.querySelectorAll('.treatment-modal-close').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      btn.closest('.treatment-modal-bg').classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+  document.querySelectorAll('.treatment-modal-bg').forEach(bg => {
+    bg.addEventListener('click', (e) => {
+      if (e.target === bg) {
+        bg.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+})();
+</script>
+<div class="treatment-modal-bg" id="modal-treatment-1">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-1">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 14c2-3 4.3-4.5 7-4.5S17 11 19 14"/><path d="M7 17c1.6-1.8 3.3-2.7 5-2.7 1.7 0 3.4.9 5 2.7"/></svg></span>
+      <h3>Trychologiczne Head Spa</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>To nasz flagowy zabieg, który udowadnia, że dbanie o zdrowie może być czystą przyjemnością. Rytuał zaczynamy od dogłębnego oczyszczenia skóry głowy z nadmiaru zrogowaciałego naskórka i osadów, których nie da się usunąć podczas codziennego mycia w domu. Następnie, przy użyciu profesjonalnych dermokosmetyków i kojącej pary, wprowadzamy składniki aktywne w głąb włosa. Całość odbywa się w atmosferze głębokiego relaksu, przy użyciu technik masażu, które wyciszają zmysły. Efekt? Skóra, która w końcu „oddycha", włosy lśniące jak po najlepszej regeneracji i głowa wolna od codziennych trosk.</p>
+    </div>
+  </div>
+</div>
+<div class="treatment-modal-bg" id="modal-treatment-2">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-2">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6c1 1.2 2.5 2 4.2 2H14c3.3 0 6 2.7 6 6v4"/><path d="M8 18c0-2.2 1.8-4 4-4h4"/></svg></span>
+      <h3>Terapia powięzi Obręczy barkowej</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>Często nie zdajemy sobie sprawy, że kondycja naszych włosów zaczyna się już w ramionach. Chroniczny stres i godziny spędzone przed komputerem powodują, że mięśnie karku stają się sztywne jak pancerz, co ogranicza dopływ krwi do skóry głowy. Nasz masaż koncentruje się na rozluźnieniu tych napięć i „odblokowaniu" przepływu energii oraz składników odżywczych. To idealne rozwiązanie dla osób skarżących się na bóle głowy i zmęczenie. Po zabiegu poczujesz niesamowitą lekkość w ramionach, a Twoje cebulki włosowe otrzymają naturalny zastrzyk energii dzięki lepszemu ukrwieniu.</p>
+    </div>
+  </div>
+</div>
+<div class="treatment-modal-bg" id="modal-treatment-3">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-3">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5c2.8 2 4.5 4.4 4.5 7.1A4.5 4.5 0 1 1 7.5 12C7.5 9.4 9.2 7 12 5Z"/><path d="M9 16c.8-1 1.8-1.5 3-1.5s2.2.5 3 1.5"/></svg></span>
+      <h3>Terapia powięzi skóry głowy</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>To technika dla osób, które szukają głębokiego efektu terapeutycznego. Z biegiem czasu skóra głowy może stać się napięta i „przyklejona" do podłoża, co utrudnia pracę mieszków włosowych i przyspiesza wypadanie włosów. Podczas masażu powięziowego pracujemy nad przywróceniem skórze elastyczności i mobilności. Jest to niezwykle odprężające uczucie, które uwalnia od napięciowych bólów głowy i stymuluje mikrokrążenie. Skóra staje się lepiej odżywiona, a Ty odczuwasz głęboki spokój, który promieniuje na całą twarz, dając efekt naturalnego wypoczęcia.</p>
+    </div>
+  </div>
+</div>
+<div class="treatment-modal-bg" id="modal-treatment-4">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-4">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 5c5 1.5 8 5.8 8 12"/><path d="M10 4c5 1.3 8 5.2 8 11"/></svg></span>
+      <h3>Trychologiczny zabieg na łodygę włosa</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>Zapomnij o maskach, które działają tylko do pierwszego mycia. Nasz zabieg to intensywna kuracja naprawcza, która wnika w głąb włosa, uzupełniając ubytki w jego strukturze. Skupiamy się na dostarczeniu lipidów i protein, które są naturalnym budulcem włosa. Po zabiegu pasma są wyraźnie grubsze, bardziej elastyczne i odporne na łamanie czy rozdwajanie. To ratunek dla włosów, które straciły swoją witalność przez stylizację lub czynniki zewnętrzne.</p>
+    </div>
+  </div>
+</div>
+<div class="treatment-modal-bg" id="modal-treatment-5">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-5">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c3 3.2 5 6 5 9a5 5 0 1 1-10 0c0-3 2-5.8 5-9Z"/></svg></span>
+      <h3>Trychologiczny zabieg na skórę głowy</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>Jeśli borykasz się z łupieżem, nadmiernym przetłuszczaniem, swędzeniem czy pieczeniem – ten zabieg jest stworzony dla Ciebie. Używamy profesjonalnych preparatów leczniczych, które przywracają skórze jej naturalną równowagę i odpowiednie pH. Oczyszczamy skórę z tzw. czopa łojowego, który często blokuje wzrost nowych włosów. Zdrowa, ukojona skóra to jedyny fundament, na którym mogą urosnąć zdrowe i mocne włosy.</p>
+    </div>
+  </div>
+</div>
+<div class="treatment-modal-bg" id="modal-treatment-6">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-6">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c0-5 1.4-8.8 4.2-11.5C18 7.7 20.1 6.2 22 5.5c-.5 3.1-1.9 5.7-4.1 7.7C16 15 14 16 12 16.6"/><path d="M12 16.4C10 16 8 15 6 13.2 3.8 11.2 2.4 8.7 2 5.5c1.9.7 4 2.2 5.8 4C10.6 12.2 12 16 12 21Z"/></svg></span>
+      <h3>Mezoterapia mikroigłowa</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>To zabieg dla osób, które chcą realnie zagęścić swoją fryzurę. Przy pomocy urządzenia z cieniutkimi igiełkami wykonujemy tysiące mikroskopijnych nakłuć. Działa to dwutorowo: po pierwsze, pobudzamy skórę do naturalnej regeneracji i produkcji nowych komórek, a po drugie – tworzymy drogę dla silnie skoncentrowanych ampułek, by mogły dotrzeć bezpośrednio do cebulek. To jeden z najskuteczniejszych sposobów na walkę z wypadaniem włosów i pobudzenie „baby hair".</p>
+    </div>
+  </div>
+</div>
+<div class="treatment-modal-bg" id="modal-treatment-7">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-7">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M7 7v10"/><path d="M17 7v10"/><path d="M12 7v10"/><path d="M6 17c1.2 0 2-.7 2-1.8V14"/><path d="M16 17c1.2 0 2-.7 2-1.8V14"/></svg></span>
+      <h3>Mezoterapia igłowa</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>Najbardziej bezpośrednia forma odżywienia włosów, jaką zna współczesna trychologia. Podczas zabiegu wprowadzamy specjalistyczny koktajl, czyli witaminy, minerały i peptydy, bezpośrednio do głębokich warstw skóry, tam gdzie odbywa się wzrost włosa. Omijamy barierę naskórkową, której nie przebije żaden szampon czy wcierka. To zabieg o ogromnej sile działania, idealny przy silnym wypadaniu włosów i potrzebie szybkiej regeneracji.</p>
+    </div>
+  </div>
+</div>
+<div class="treatment-modal-bg" id="modal-treatment-8">
+  <div class="treatment-modal-box">
+    <button class="treatment-modal-close" onclick="this.closest('.treatment-modal-bg').classList.remove('active'); document.body.style.overflow='';" data-close="treatment-8">✕</button>
+    <div class="treatment-modal-header">
+      <span class="treatment-modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></span>
+      <h3>Karboksyterapia</h3>
+    </div>
+    <div class="treatment-modal-body">
+      <p>Często nazywana „cudownym gazem", karboksyterapia polega na podaniu pod skórę medycznego dwutlenku węgla. Mechanizm jest prosty i genialny: organizm, czując gaz, wysyła w to miejsce ogromną ilość tlenu i krwi, by go zneutralizować. Dzięki temu mieszki włosowe zostają gwałtownie dożywione i dotlenione, jak nigdy wcześniej. To potężny impuls, który pobudza cebulki do pracy i pomaga hamować proces wypadania włosów w krótkim czasie.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
